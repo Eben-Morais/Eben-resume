@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowDownToLine, Sun, Moon } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { scrollToSection } from '../utils/scroll';
 
 const navItems = [
   { label: 'About', href: '#about', id: 'about' },
@@ -40,7 +41,18 @@ function Navbar({ darkMode, toggleDarkMode }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ── 2. Decoupled scroll-spy via IntersectionObserver (replaces querySelector + offsetTop) ──
+  // ── 2. Close mobile drawer on resize to desktop (>= 1000px) ────────────────
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1000) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // ── 3. Decoupled scroll-spy via IntersectionObserver ───────────────────────
   useEffect(() => {
     const sectionElements = navItems
       .map((item) => document.getElementById(item.id))
@@ -86,11 +98,15 @@ function Navbar({ darkMode, toggleDarkMode }) {
         {/* Brand */}
         <a
           href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('top', '#top');
+          }}
           className="flex items-center gap-2.5 group focus-visible:outline-none rounded py-1 px-1.5"
           aria-label="Eben Morais, return to top"
         >
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white"
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shadow-sm transition-transform duration-200 group-hover:scale-105"
             style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
           >
             E
@@ -104,13 +120,54 @@ function Navbar({ darkMode, toggleDarkMode }) {
         </a>
 
         {/*
-          Desktop nav links are intentionally hidden here on md+ —
-          section navigation is handled by the RadialNav component.
-          Mobile hamburger drawer (below) provides navigation on small screens.
+          Traditional Navigation Links:
+          Visible between 1000px and 1440px via .nav-traditional-links class.
+          Hidden below 1000px (handled by hamburger drawer)
+          Hidden at >= 1440px (handled by RadialNav)
         */}
+        <nav
+          aria-label="Main navigation"
+          className="nav-traditional-links items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full"
+          style={{
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--border)',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveSection(item.id);
+                  scrollToSection(item.id, item.href);
+                }}
+                className="relative px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none"
+                style={{
+                  color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
+                  background: isActive ? 'var(--accent-softer)' : 'transparent',
+                  border: isActive ? '1px solid var(--border-accent)' : '1px solid transparent',
+                }}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item.label}
+                {isActive && (
+                  <span
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                    style={{ background: 'var(--accent)', boxShadow: '0 0 6px var(--accent)' }}
+                    aria-hidden="true"
+                  />
+                )}
+              </a>
+            );
+          })}
+        </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop Actions (Theme toggle + Resume button, visible >= 1000px) */}
+        <div className="nav-desktop-actions items-center gap-3">
           {/* Theme Toggle */}
           <button
             type="button"
@@ -146,8 +203,8 @@ function Navbar({ darkMode, toggleDarkMode }) {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center gap-2">
+        {/* Mobile Menu Controls (Theme toggle + Hamburger button, visible < 1000px) */}
+        <div className="nav-mobile-controls items-center gap-2">
           <button
             type="button"
             onClick={toggleDarkMode}
@@ -179,38 +236,53 @@ function Navbar({ darkMode, toggleDarkMode }) {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Overlay dropdown, visible < 1000px when isOpen) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             id="mobile-navigation"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="nav-mobile-drawer absolute top-full left-0 right-0 overflow-hidden shadow-2xl"
             style={{
               background: 'var(--bg-surface)',
               borderBottom: '1px solid var(--border)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
             }}
           >
-            <div className="px-4 py-4">
+            <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6">
               <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.id;
                   return (
                     <a
-                      key={item.href}
+                      key={item.id}
                       href={item.href}
-                      onClick={closeMenu}
-                      className="px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        closeMenu();
+                        setActiveSection(item.id);
+                        scrollToSection(item.id, item.href);
+                      }}
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150"
                       style={{
                         color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                         background: isActive ? 'var(--accent-softer)' : 'transparent',
+                        border: isActive ? '1px solid var(--border-accent)' : '1px solid transparent',
                       }}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      {item.label}
+                      <span>{item.label}</span>
+                      {isActive && (
+                        <span
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ background: 'var(--accent)' }}
+                          aria-hidden="true"
+                        />
+                      )}
                     </a>
                   );
                 })}
