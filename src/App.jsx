@@ -12,6 +12,7 @@ import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ArrowUp, Check } from 'lucide-react';
+import { scrollToSection } from './utils/scroll';
 
 // ── Dark mode persistence ─────────────────────────────────────────────────────
 function getInitialDarkMode() {
@@ -92,6 +93,10 @@ export default function App() {
       {/* Skip to Main Content (Accessibility) */}
       <a
         href="#about"
+        onClick={(e) => {
+          e.preventDefault();
+          scrollToSection('about', '#about');
+        }}
         className="fixed top-3 left-3 z-[100] px-4 py-2 text-xs font-medium rounded shadow -translate-y-24 focus:translate-y-0 transition-transform focus-visible:outline-none"
         style={{ background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-accent)' }}
       >

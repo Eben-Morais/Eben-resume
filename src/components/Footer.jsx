@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
 import { portfolioData } from '../data/portfolioData';
+import { scrollToSection } from '../utils/scroll';
 
 const footerLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Education', href: '#education', id: 'education' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 function Footer() {
@@ -58,10 +59,14 @@ function Footer() {
 
           {/* Navigation links */}
           <nav aria-label="Footer navigation" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            {footerLinks.map(({ label, href }) => (
+            {footerLinks.map(({ label, href, id }) => (
               <a
                 key={href}
                 href={href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(id, href);
+                }}
                 className="text-xs font-medium transition-colors focus-visible:outline-none"
                 style={{ color: 'var(--text-muted)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; }}
