@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   PREMIUM DESIGN SYSTEM — CSS CUSTOM PROPERTIES
+   ========================================================= */
+
+@layer base {
+  /* ── Dark Mode Theme (default) ── */
+  :root,
+  .dark {
+    --bg-base: #0f0f17;
+    --bg-surface: #16162a;
+    --bg-elevated: #1e1e35;
+    --bg-card: rgba(22, 22, 42, 0.7);
+
+    --accent: #818cf8;          /* indigo-400 */
+    --accent-mid: #6366f1;      /* indigo-500 */
+    --accent-soft: rgba(99, 102, 241, 0.15);
+    --accent-softer: rgba(99, 102, 241, 0.07);
+    --accent-violet: #a78bfa;   /* violet-400 */
+
+    --text-primary: #e2e8f0;    /* slate-200 */
+    --text-secondary: #94a3b8;  /* slate-400 */
+    --text-muted: #475569;      /* slate-600 */
+    --text-faint: #334155;      /* slate-700 */
+
+    --border: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    --border-accent: rgba(129, 140, 248, 0.25);
+
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.5);
+
+    --nav-height: 4rem;
+    color-scheme: dark;
+    background-color: var(--bg-base);
+  }
+
+  /* ── Light Mode Theme ── */
+  .light {
+    --bg-base: #f8f7ff;
+    --bg-surface: #ffffff;
+    --bg-elevated: #f0effe;
+    --bg-card: rgba(255, 255, 255, 0.85);
+
+    --accent: #4f46e5;          /* indigo-600 */
+    --accent-mid: #6366f1;      /* indigo-500 */
+    --accent-soft: rgba(79, 70, 229, 0.1);
+    --accent-softer: rgba(79, 70, 229, 0.05);
+    --accent-violet: #7c3aed;   /* violet-600 */
+
+    --text-primary: #0f172a;    /* slate-900 */
+    --text-secondary: #475569;  /* slate-600 */
+    --text-muted: #94a3b8;      /* slate-400 */
+    --text-faint: #cbd5e1;      /* slate-300 */
+
+    --border: rgba(0, 0, 0, 0.07);
+    --border-strong: rgba(0, 0, 0, 0.12);
+    --border-accent: rgba(79, 70, 229, 0.2);
+
+    --shadow-sm: 0 2px 12px rgba(79, 70, 229, 0.06);
+    --shadow-md: 0 4px 24px rgba(79, 70, 229, 0.1);
+    --shadow-lg: 0 8px 48px rgba(79, 70, 229, 0.12);
+
+    color-scheme: light;
+    background-color: var(--bg-base);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-height, 4rem) + 2rem);
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* ── Premium Scrollbar ── */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-soft);
+  }
+}
+
+/* =========================================================
+   UTILITY CLASSES
+   ========================================================= */
+
+@layer utilities {
+
+  /* ── Typography Gradients ── */
+  .gradient-text {
+    background: linear-gradient(135deg, #e2e8f0 0%, #c7d2fe 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .light .gradient-text {
+    background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-subtle {
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .accent-text {
+    color: var(--accent);
+  }
+
+  /* ── Glass Morphism Cards ── */
+  .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+  .glass-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-md), 0 0 0 1px var(--border-accent);
+  }
+
+  /* ── Bento Card Variant ── */
+  .bento-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bento-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  /* ── Gradient Accent Border ── */
+  .accent-border-top {
+    border-top: 1px solid transparent;
+    background-image: linear-gradient(var(--bg-card), var(--bg-card)),
+      linear-gradient(90deg, var(--accent), var(--accent-violet));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* ── Hairline helpers (kept for backward compat) ── */
+  .hairline-border {
+    border-color: var(--border);
+  }
+  .hairline-rule {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Section separator ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  }
+
+  /* ── Skill pill ── */
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    background: var(--accent-softer);
+    color: var(--accent);
+    border: 1px solid var(--border-accent);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .skill-pill:hover {
+    background: var(--accent-soft);
+  }
+
+  /* ── Timeline rail ── */
+  .timeline-rail {
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  /* ── Gradient button ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.45);
+    filter: brightness(1.1);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-strong);
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+    background: var(--accent-softer);
+  }
+
+  /* ── Shimmer animated gradient text ── */
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      var(--text-primary) 0%,
+      var(--accent) 30%,
+      var(--accent-violet) 50%,
+      var(--accent) 70%,
+      var(--text-primary) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* ── Noise texture overlay ── */
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  /* Keyframe for fade-in (used in toast) */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.25s ease forwards;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+}
