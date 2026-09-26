@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, Code2, Briefcase, FolderOpen, GraduationCap, Mail,
 } from 'lucide-react';
+import { scrollToSection } from '../utils/scroll';
 
 // ── Navigation items matching section IDs ──────────────────────────────────────
 const NAV_ITEMS = [
@@ -105,17 +106,11 @@ function RadialNav() {
     };
   }, []);
 
-  // ── 3. Smooth scroll on click ─────────────────────────────────────────────
+  // ── 3. Smooth scroll on click (positions section top 10% below viewport top) ─
   const handleNavClick = (e, href, id) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      setActiveSection(id);
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (window.history.pushState) {
-        window.history.pushState(null, '', href);
-      }
-    }
+    setActiveSection(id);
+    scrollToSection(id, href);
   };
 
   // ── 4. Dynamic horizontal radius (50% resting, 100% on mouse over area) ──
@@ -128,12 +123,12 @@ function RadialNav() {
 
   return (
     /*
-     * Tablet & desktop only (>= 768px). Fixed container dimension eliminates layout thrashing.
+     * Large desktop only (>= 1440px via .radial-nav-container).
      * Pointer-events-none on outer container so page clicks behind are never blocked.
      */
     <aside
       aria-label="Section navigation"
-      className="hidden md:block fixed z-40 pointer-events-none"
+      className="radial-nav-container fixed z-40 pointer-events-none"
       style={{
         right: 0,
         top: '50%',

@@ -70,7 +70,7 @@
   }
 
   html {
-    scroll-padding-top: calc(var(--nav-height, 4rem) + 2rem);
+    scroll-padding-top: 10vh;
   }
 
   body {
@@ -288,4 +288,80 @@
     0% { background-position: -200% center; }
     100% { background-position: 200% center; }
   }
+
+  /* =========================================================
+     RESPONSIVE NAVBAR & RADIAL NAV DISPLAY RULES
+     - width >= 1440px:
+         RadialNav: VISIBLE
+         Traditional Nav Links in header: HIDDEN
+         Desktop Actions: VISIBLE
+         Mobile Controls & Drawer: HIDDEN
+     - 1000px <= width < 1440px:
+         RadialNav: HIDDEN
+         Traditional Nav Links in header: VISIBLE (flex)
+         Desktop Actions: VISIBLE
+         Mobile Controls & Drawer: HIDDEN
+     - width < 1000px:
+         RadialNav: HIDDEN
+         Traditional Nav Links in header: HIDDEN
+         Desktop Actions: HIDDEN
+         Mobile Controls: VISIBLE (flex)
+         Mobile Drawer: VISIBLE when open
+     ========================================================= */
+
+  /* Default (mobile / width < 1000px) */
+  .radial-nav-container {
+    display: none !important;
+  }
+  .nav-traditional-links {
+    display: none !important;
+  }
+  .nav-desktop-actions {
+    display: none !important;
+  }
+  .nav-mobile-controls {
+    display: flex !important;
+  }
+  .nav-mobile-drawer {
+    display: block;
+  }
+
+  /* Traditional navbar range: 1000px <= width < 1440px */
+  @media (min-width: 1000px) and (max-width: 1439.98px) {
+    .radial-nav-container {
+      display: none !important;
+    }
+    .nav-traditional-links {
+      display: flex !important;
+    }
+    .nav-desktop-actions {
+      display: flex !important;
+    }
+    .nav-mobile-controls {
+      display: none !important;
+    }
+    .nav-mobile-drawer {
+      display: none !important;
+    }
+  }
+
+  /* Radial navigation range: width >= 1440px */
+  @media (min-width: 1440px) {
+    .radial-nav-container {
+      display: block !important;
+    }
+    .nav-traditional-links {
+      display: none !important;
+    }
+    .nav-desktop-actions {
+      display: flex !important;
+    }
+    .nav-mobile-controls {
+      display: none !important;
+    }
+    .nav-mobile-drawer {
+      display: none !important;
+    }
+  }
 }
+

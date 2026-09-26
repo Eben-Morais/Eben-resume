@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ArrowDownToLine, Mail, Sparkles } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { scrollToSection } from '../utils/scroll';
 
 const stats = [
   { value: `${portfolioData.experience.length}`, label: 'Industrial Traineeships' },
@@ -129,6 +130,10 @@ function Hero() {
           >
             <a
               href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('projects', '#projects');
+              }}
               className="btn-primary"
               style={{ fontFamily: 'inherit' }}
             >
