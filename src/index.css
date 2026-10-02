@@ -7,6 +7,7 @@
    ========================================================= */
 
 @layer base {
+
   /* ── Dark Mode Theme (default) ── */
   :root,
   .dark {
@@ -15,16 +16,23 @@
     --bg-elevated: #1e1e35;
     --bg-card: rgba(22, 22, 42, 0.7);
 
-    --accent: #818cf8;          /* indigo-400 */
-    --accent-mid: #6366f1;      /* indigo-500 */
+    --accent: #818cf8;
+    /* indigo-400 */
+    --accent-mid: #6366f1;
+    /* indigo-500 */
     --accent-soft: rgba(99, 102, 241, 0.15);
     --accent-softer: rgba(99, 102, 241, 0.07);
-    --accent-violet: #a78bfa;   /* violet-400 */
+    --accent-violet: #a78bfa;
+    /* violet-400 */
 
-    --text-primary: #e2e8f0;    /* slate-200 */
-    --text-secondary: #94a3b8;  /* slate-400 */
-    --text-muted: #475569;      /* slate-600 */
-    --text-faint: #334155;      /* slate-700 */
+    --text-primary: #e2e8f0;
+    /* slate-200 */
+    --text-secondary: #94a3b8;
+    /* slate-400 */
+    --text-muted: #69a5f9;
+    /* slate-600 */
+    --text-faint: #334155;
+    /* slate-700 */
 
     --border: rgba(255, 255, 255, 0.07);
     --border-strong: rgba(255, 255, 255, 0.12);
@@ -46,16 +54,23 @@
     --bg-elevated: #f0effe;
     --bg-card: rgba(255, 255, 255, 0.85);
 
-    --accent: #4f46e5;          /* indigo-600 */
-    --accent-mid: #6366f1;      /* indigo-500 */
+    --accent: #4f46e5;
+    /* indigo-600 */
+    --accent-mid: #6366f1;
+    /* indigo-500 */
     --accent-soft: rgba(79, 70, 229, 0.1);
     --accent-softer: rgba(79, 70, 229, 0.05);
-    --accent-violet: #7c3aed;   /* violet-600 */
+    --accent-violet: #7c3aed;
+    /* violet-600 */
 
-    --text-primary: #0f172a;    /* slate-900 */
-    --text-secondary: #475569;  /* slate-600 */
-    --text-muted: #94a3b8;      /* slate-400 */
-    --text-faint: #cbd5e1;      /* slate-300 */
+    --text-primary: #0f172a;
+    /* slate-900 */
+    --text-secondary: #475569;
+    /* slate-600 */
+    --text-muted: #000000;
+    /* slate-400 */
+    --text-faint: #cbd5e1;
+    /* slate-300 */
 
     --border: rgba(0, 0, 0, 0.07);
     --border-strong: rgba(0, 0, 0, 0.12);
@@ -83,13 +98,16 @@
   ::-webkit-scrollbar {
     width: 5px;
   }
+
   ::-webkit-scrollbar-track {
     background: var(--bg-base);
   }
+
   ::-webkit-scrollbar-thumb {
     background: var(--border-strong);
     border-radius: 10px;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-soft);
   }
@@ -108,6 +126,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
   .light .gradient-text {
     background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #7c3aed 100%);
     -webkit-background-clip: text;
@@ -135,6 +154,7 @@
     box-shadow: var(--shadow-sm);
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   }
+
   .glass-card:hover {
     border-color: var(--border-accent);
     box-shadow: var(--shadow-md), 0 0 0 1px var(--border-accent);
@@ -150,6 +170,7 @@
     padding: 1.5rem;
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   .bento-card:hover {
     border-color: var(--border-accent);
     box-shadow: var(--shadow-md);
@@ -169,6 +190,7 @@
   .hairline-border {
     border-color: var(--border);
   }
+
   .hairline-rule {
     border-bottom: 1px solid var(--border);
   }
@@ -192,6 +214,7 @@
     border: 1px solid var(--border-accent);
     transition: background 0.2s ease, color 0.2s ease;
   }
+
   .skill-pill:hover {
     background: var(--accent-soft);
   }
@@ -216,11 +239,13 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
   }
+
   .btn-primary:hover {
     transform: translateY(-1px);
     box-shadow: 0 6px 24px rgba(99, 102, 241, 0.45);
     filter: brightness(1.1);
   }
+
   .btn-primary:active {
     transform: translateY(0);
   }
@@ -239,6 +264,7 @@
     border: 1px solid var(--border-strong);
     transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
   }
+
   .btn-secondary:hover {
     border-color: var(--accent);
     color: var(--text-primary);
@@ -247,14 +273,12 @@
 
   /* ── Shimmer animated gradient text ── */
   .shimmer-text {
-    background: linear-gradient(
-      90deg,
-      var(--text-primary) 0%,
-      var(--accent) 30%,
-      var(--accent-violet) 50%,
-      var(--accent) 70%,
-      var(--text-primary) 100%
-    );
+    background: linear-gradient(90deg,
+        var(--text-primary) 0%,
+        var(--accent) 30%,
+        var(--accent-violet) 50%,
+        var(--accent) 70%,
+        var(--text-primary) 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -277,16 +301,29 @@
 
   /* Keyframe for fade-in (used in toast) */
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
   .animate-fade-in {
     animation: fade-in 0.25s ease forwards;
   }
 
   @keyframes shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
+    0% {
+      background-position: -200% center;
+    }
+
+    100% {
+      background-position: 200% center;
+    }
   }
 
   /* =========================================================
@@ -313,15 +350,19 @@
   .radial-nav-container {
     display: none !important;
   }
+
   .nav-traditional-links {
     display: none !important;
   }
+
   .nav-desktop-actions {
     display: none !important;
   }
+
   .nav-mobile-controls {
     display: flex !important;
   }
+
   .nav-mobile-drawer {
     display: block;
   }
@@ -331,15 +372,19 @@
     .radial-nav-container {
       display: none !important;
     }
+
     .nav-traditional-links {
       display: flex !important;
     }
+
     .nav-desktop-actions {
       display: flex !important;
     }
+
     .nav-mobile-controls {
       display: none !important;
     }
+
     .nav-mobile-drawer {
       display: none !important;
     }
@@ -350,18 +395,21 @@
     .radial-nav-container {
       display: block !important;
     }
+
     .nav-traditional-links {
       display: none !important;
     }
+
     .nav-desktop-actions {
       display: flex !important;
     }
+
     .nav-mobile-controls {
       display: none !important;
     }
+
     .nav-mobile-drawer {
       display: none !important;
     }
   }
 }
-

@@ -60,6 +60,18 @@ export const portfolioData = {
 
   experience: [
     {
+      role: "Quality Assurance Engineer",
+      company: "Simforge",
+      period: "Jul 2026 – Present",
+      type: "Full time · Quality Assurance Engineer",
+      responsibilities: [
+        "Automated end-to-end regression test suites with Playwright, significantly improving testing efficiency.",
+        "Executed exploratory and manual testing to discover, track, and resolve critical bugs.",
+        "Conducted pre-deployment verification for fixes and features, preventing high-priority regressions in production.."
+      ],
+      tags: ["QA", "Playwright", "Automated Testing", "ManualTesting"]
+    },
+    {
       role: "Web Developer Trainee",
       company: "Remote Software Solutions Pvt. Ltd.",
       period: "Jul 2025 – Aug 2025",
@@ -123,9 +135,9 @@ export const portfolioData = {
     {
       degree: "Bachelor of Engineering in Computer Engineering",
       institution: "Padre Conceicao College of Engineering, Verna, Goa",
-      period: "Aug 2023 – Jul 2026 (Expected)",
+      period: "Aug 2023 – Aug 2026",
       honors: "Artificial Intelligence and Machine Learning",
-      score: "Current CGPA: 6.8"
+      score: "Current CGPA: 7"
     },
     {
       degree: "Diploma in Computer Engineering",
