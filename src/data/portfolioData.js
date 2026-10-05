@@ -6,15 +6,13 @@ export const portfolioData = {
     availability: "Open to junior web and backend opportunities",
     tagline: "Final-year Computer Engineering student with practical front-end and backend training, building focused web applications and an IoT-based vehicle emissions monitoring system.",
     bio: [
-      "I am a final-year Bachelor of Engineering student in Computer Engineering, expected to graduate in July 2026, with a Diploma in Computer Engineering and practical exposure to both front-end and backend web development.",
-      "My experience includes implementing NestJS backend features such as authentication, route protection, and Prisma-based database integration, as well as translating a Figma webpage design into HTML, CSS, and JavaScript. I am interested in Junior Web Developer and Junior Backend Developer opportunities.",
-      "I bring a problem-solving mindset, a willingness to learn, and a focus on turning technical concepts into usable applications."
+      "I am a Computer Engineering graduate (B.E. with Honors in AI/ML) and Diploma holder with hands-on experience spanning full-stack web development and quality assurance. My recent work includes building NestJS backends with robust authentication and Prisma ORM, translating Figma designs into responsive webpages, and automating end-to-end test suites using Playwright. As a quick learner and natural problem-solver, I focus on turning complex technical concepts into reliable, production-ready applications. I am actively seeking Junior Web Developer and Junior Backend Developer roles."
     ],
     facts: [
       { label: "Location", value: "Moira, Goa, India" },
       { label: "Education", value: "B.E. Computer Engineering" },
       { label: "Honors", value: "AI & Machine Learning" },
-      { label: "Current CGPA", value: "6.8" },
+      { label: "Current CGPA", value: "7" },
       { label: "Primary focus", value: "Web & backend development" },
       { label: "Languages", value: "English, Konkani, Hindi" }
     ],
@@ -22,7 +20,7 @@ export const portfolioData = {
       { value: "2", label: "development internships" },
       { value: "2", label: "featured projects" },
       { value: "4", label: "certifications" },
-      { value: "2026", label: "expected graduation" }
+      { value: "2026", label: "graduated" }
     ]
   },
 
@@ -59,6 +57,18 @@ export const portfolioData = {
   ],
 
   experience: [
+    {
+      role: "Quality Assurance Engineer",
+      company: "Simforge",
+      period: "Jul 2026 – Present",
+      type: "Full time · Quality Assurance Engineer",
+      responsibilities: [
+        "Automated end-to-end regression test suites with Playwright, significantly improving testing efficiency.",
+        "Executed exploratory and manual testing to discover, track, and resolve critical bugs.",
+        "Conducted pre-deployment verification for fixes and features, preventing high-priority regressions in production.."
+      ],
+      tags: ["QA", "Playwright", "Automated Testing", "ManualTesting"]
+    },
     {
       role: "Web Developer Trainee",
       company: "Remote Software Solutions Pvt. Ltd.",
@@ -123,9 +133,9 @@ export const portfolioData = {
     {
       degree: "Bachelor of Engineering in Computer Engineering",
       institution: "Padre Conceicao College of Engineering, Verna, Goa",
-      period: "Aug 2023 – Jul 2026 (Expected)",
+      period: "Aug 2023 – Aug 2026",
       honors: "Artificial Intelligence and Machine Learning",
-      score: "Current CGPA: 6.8"
+      score: "Current CGPA: 7"
     },
     {
       degree: "Diploma in Computer Engineering",
